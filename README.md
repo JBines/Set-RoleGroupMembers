@@ -31,6 +31,7 @@ We used AzureADPreview Version: 2.0.2.5 ()
 Please note, when using Azure Automation with more than one user group the array should be set to JSON for example ['ObjectID','ObjectID']
 
 ```powershell
+<#
 .SYNOPSIS
 This script automates the population of members from one group as members on CUSTOM Exchange Role Groups.  
 
@@ -89,5 +90,5 @@ Find me on:
 * Web:     https://theinformationstore.com.au
 * LinkedIn:  https://www.linkedin.com/in/joshua-bines-4451534
 * Github:    https://github.com/jbines
-
+#>
 ```
