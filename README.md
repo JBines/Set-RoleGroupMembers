@@ -1,10 +1,10 @@
 # Set-RoleGroupMembers
-This script automates the population of members from one group as members on CUSTOM Exchange Role Groups.  
+This script automates the population of members from one group as members on CUSTOM Exchange Online Role Groups.  
 
 This has been created with the primary goal of allowing scoped administrators to manage Exchange permissions on a subset of users and groups.  
 
 ```powershell
-Set-RoleGroupMembers -OwnerSourceGroup "<string[ObjectID]>" -RoleGroupsIdentity <Array[GUID]>" -DifferentialScope ""
+Set-RoleGroupMembers -OwnerSourceGroup "<string[ObjectID]>" -RoleGroupsIdentity "<Array[GUID]>"  -DifferentialScope "Int[Number]" -AutomationPSCredential "<string[Cred]>"
 ```
 
 ### Examples
@@ -12,6 +12,7 @@ Set-RoleGroupMembers -OwnerSourceGroup "<string[ObjectID]>" -RoleGroupsIdentity 
 Set-AzureGroupOwners -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity '0e55190c-73ee-e811-80e9-005056a31be6'
 ```
 In this example the script will add users (members of Group '7b7c4926-c6d7-4ca8-9bbf-5965751022c2') as members to the Role group '0e55190c-73ee-e811-80e9-005056a31be6'
+
 
 ```powershell
 Set-AzureGroupOwners -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity "0e55190c-73ee-e811-80e9-005056a31be6","0e55190c-73ee-e811-80e9-005056a3" -DifferentialScope 20
