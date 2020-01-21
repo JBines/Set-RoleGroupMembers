@@ -63,6 +63,8 @@ Find me on:
 0.0.2 20190314 - JBines - [BUGFIX] Removed Secure String and Begin Process End as it is not supported in azure automation. 
                         - [Feature] Added a write-output when AutomationPSCredential is using in the write-log function
 1.0.0 20190314 - JBines - [MAJOR RELEASE] Other than that it works like a dream... 
+1.0.1 20191001 - CG     - Changed variable $OwnerSourceGroup from String type to $OwnerSourceGroups of Array type for maximum flexibility.
+1.0.2 20191021 - JBines - [BUGFIX] Added Select-Object -Unique on the $RoleGroupsIdentity Array.
 
 [TO DO LIST / PRIORITY]
 
@@ -72,7 +74,7 @@ Param
 (
     [Parameter(Mandatory = $True)]
     [ValidateNotNullOrEmpty()]
-    [String]$OwnerSourceGroup,
+    [Array]$OwnerSourceGroups,
     [Parameter(Mandatory = $True)]
     [ValidateNotNullOrEmpty()]
     [array]$RoleGroupsIdentity,
@@ -95,7 +97,7 @@ Param
     $iString0 = "Processing Role Group"
 
 # Warn Strings
-    $wString0 = "CMDlet:Measure-Object;No Members found in OwnerSourceGroup"
+    $wString0 = "CMDlet:Measure-Object;No Members found in OwnerSourceGroups"
     $wString1 = "CMDlet:Measure-Object;No Members found in RoleGroup"
 
 # Error Strings
@@ -158,8 +160,10 @@ Param
 
             }
                             
-        #New Array and Count of Users from Azure Group
-        $OwnerSourceGroupMembers = Get-AzureADGroupMember -ObjectId $OwnerSourceGroup
+        $objOwnerSourceGroupMembers = @($OwnerSourceGroups | ForEach-Object {Get-AzureADGroupMember -ObjectId $_})
+
+        #Return Only Unique values remove any duplicates
+        $OwnerSourceGroupMembers = $objOwnerSourceGroupMembers | Select-Object -Unique
 
         #Check if Owners Group is $Null
         $OwnerSourceGroupMembersNull = $False
