@@ -39,28 +39,28 @@ The AzureADTenantId parameter You must specify the TenantId parameter to authent
 
 
 .EXAMPLE
-Set-AzureGroupOwners -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity '0e55190c-73ee-e811-80e9-005056a31be6'
+Set-RoleGroupMembers -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity '0e55190c-73ee-e811-80e9-005056a31be6'
 
 -- SET MEMBERS FOR ROLE GROUPS --
 
 In this example the script will add users (members of Group '7b7c4926-c6d7-4ca8-9bbf-5965751022c2') as members to the Role group '0e55190c-73ee-e811-80e9-005056a31be6'
 
 .EXAMPLE
-Set-AzureGroupOwners -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity "0e55190c-73ee-e811-80e9-005056a31be6","0e55190c-73ee-e811-80e9-005056a3" -DifferentialScope 20
+Set-RoleGroupMembers -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity "0e55190c-73ee-e811-80e9-005056a31be6","0e55190c-73ee-e811-80e9-005056a3" -DifferentialScope 20
 
 -- SET MEMBERS FOR 2 ROLE GROUPS & INCREASE DIFFERENTIAL SCOPE TO 20 --
 
 In this example the script will add users (members of Group '7b7c4926-c6d7-4ca8-9bbf-5965751022c2') as members to the Role groups '0e55190c-73ee-e811-80e9-005056a31be6' & '0e55190c-73ee-e811-80e9-005056a3' while allowing 20 changes to group membership.
 
 .EXAMPLE
-Set-AzureGroupOwners -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity "0e55190c-73ee-e811-80e9-005056a31be6","0e55190c-73ee-e811-80e9-005056a3" -DifferentialScope 20
+Set-RoleGroupMembers -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity "0e55190c-73ee-e811-80e9-005056a31be6","0e55190c-73ee-e811-80e9-005056a3" -DifferentialScope 20
 
 -- SET MEMBERS FOR 2 ROLE GROUPS & INCREASE DIFFERENTIAL SCOPE TO 20 --
 
 In this example the script will add users (members of Group '7b7c4926-c6d7-4ca8-9bbf-5965751022c2') as members to the Role groups '0e55190c-73ee-e811-80e9-005056a31be6' & '0e55190c-73ee-e811-80e9-005056a3' while allowing 20 changes to group membership.
 
 .EXAMPLE
-Set-AzureGroupOwners -OwnerSourceGroup [GUID] -RoleGroupsIdentity [GUID] -EXOAutomationCertificate EXOAppCert -EXOAppId [GUID] -EXOOrganization contso.onmicrosoft.com -AzureADAutomationCertificate AzureADAppCert -AzureADAppId [GUID] -AzureADTenantId [GUID]
+Set-RoleGroupMembers -OwnerSourceGroup [GUID] -RoleGroupsIdentity [GUID] -EXOAutomationCertificate EXOAppCert -EXOAppId [GUID] -EXOOrganization contso.onmicrosoft.com -AzureADAutomationCertificate AzureADAppCert -AzureADAppId [GUID] -AzureADTenantId [GUID]
 
 -- USE APP AUTH TO SET MEMBERS FOR 2 ROLE GROUPS --
 
@@ -97,7 +97,7 @@ Find me on:
 * Github:    https://github.com/jbines
   
 [VERSION HISTORY / UPDATES]
-0.0.1 20190312 - JBines - Created the bare bones
+0.0.1 20190312 - JBINES - Created the bare bones
 0.0.2 20190314 - JBines - [BUGFIX] Removed Secure String and Begin Process End as it is not supported in azure automation. 
                         - [Feature] Added a write-output when AutomationPSCredential is using in the write-log function
 1.0.0 20190314 - JBines - [MAJOR RELEASE] Other than that it works like a dream... 
