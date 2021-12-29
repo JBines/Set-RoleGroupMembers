@@ -40,14 +40,14 @@ Set-RoleGroupMembers -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -R
 In this example the script will add users (members of Group '7b7c4926-c6d7-4ca8-9bbf-5965751022c2') as members to the Role groups '0e55190c-73ee-e811-80e9-005056a31be6' & '0e55190c-73ee-e811-80e9-005056a3' while allowing 20 changes to group membership.
 
 .EXAMPLE
-Set-RoleGroupMembers -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity "0e55190c-73ee-e811-80e9-005056a31be6","0e55190c-73ee-e811-80e9-005056a3" -DifferentialScope 20
+.\Set-AzureGroupOwners.ps1 -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -RoleGroupsIdentity "0e55190c-73ee-e811-80e9-005056a31be6","0e55190c-73ee-e811-80e9-005056a3" -DifferentialScope 20
 
 -- SET MEMBERS FOR 2 ROLE GROUPS & INCREASE DIFFERENTIAL SCOPE TO 20 --
 
 In this example the script will add users (members of Group '7b7c4926-c6d7-4ca8-9bbf-5965751022c2') as members to the Role groups '0e55190c-73ee-e811-80e9-005056a31be6' & '0e55190c-73ee-e811-80e9-005056a3' while allowing 20 changes to group membership.
 
 .EXAMPLE
-Set-RoleGroupMembers -OwnerSourceGroup [GUID] -RoleGroupsIdentity [GUID] -EXOAutomationCertificate EXOAppCert -EXOAppId [GUID] -EXOOrganization contso.onmicrosoft.com -AzureADAutomationCertificate AzureADAppCert -AzureADAppId [GUID] -AzureADTenantId [GUID]
+.\Set-AzureGroupOwners.ps1 -OwnerSourceGroup [GUID] -RoleGroupsIdentity [GUID] -EXOOrganization contso.onmicrosoft.com -EXOAutomationPSConnection [Name] -AADAutomationPSConnection [Name]
 
 -- USE APP AUTH TO SET MEMBERS FOR 2 ROLE GROUPS --
 
@@ -57,8 +57,6 @@ In this example the script uses App-only 'Modern' authentication for access to E
 .LINK
 
 Understanding Management Role Groups - https://docs.microsoft.com/en-us/exchange/understanding-management-role-groups-exchange-2013-help 
-
-Log Analytics Workspace - https://docs.microsoft.com/en-us/azure/azure-monitor/learn/quick-create-workspace
 
 App-only authentication for unattended scripts in the EXO V2 module - https://docs.microsoft.com/en-us/powershell/exchange/app-only-auth-powershell-v2?view=exchange-ps
 
@@ -202,6 +200,12 @@ Param
             $AzureADConnection = Get-AutomationConnection -Name $AADAutomationPSConnection
             Connect-AzureAD -TenantId $AzureADConnection.TenantId -ApplicationId $AzureADConnection.ApplicationId -CertificateThumbprint $AzureADConnection.CertificateThumbprint 
 
+        }
+        Else
+        {
+            Remove-Variable EXOAutomationPSConnection
+            Remove-Variable AADAutomationPSConnection
+            Remove-Variable EXOORGANIZATION
         }
 
         if ($AutomationPSCredential -and (-not($EXOAutomationPSConnection -and $AADAutomationPSConnection))) {
