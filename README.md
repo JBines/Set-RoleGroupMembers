@@ -4,7 +4,7 @@ This script automates the population of members from one group as members on CUS
 This has been created with the primary goal of allowing scoped administrators to manage Exchange permissions on a subset of users and groups.  
 
 ```powershell
-Set-RoleGroupMembers -OwnerSourceGroup "<string[ObjectID]>" -RoleGroupsIdentity "<Array[GUID]>"  -DifferentialScope "Int[Number]" -AutomationPSCredential "<string[Cred]>"
+Set-RoleGroupMembers [-OwnerSourceGroup <string[ObjectID]>] [-RoleGroupsIdentity <Array[GUID]>] [-EXOOrganization <string[*.onmicrosoft.com]>] [-EXOAutomationPSConnection <string[Name]>] [-AADAutomationPSConnection <string[Name]>]
 ```
 
 ### Examples
@@ -20,7 +20,7 @@ Set-AzureGroupOwners -OwnerSourceGroup '7b7c4926-c6d7-4ca8-9bbf-5965751022c2' -R
 In this example the script will add users (members of Group '7b7c4926-c6d7-4ca8-9bbf-5965751022c2') as members to the Role groups '0e55190c-73ee-e811-80e9-005056a31be6' & '0e55190c-73ee-e811-80e9-005056a3' while allowing 20 changes to group membership.
 
 ```powershell
-Set-AzureGroupOwners -OwnerSourceGroup [GUID] -RoleGroupsIdentity [GUID] -EXOAutomationCertificate EXOAppCert -EXOAppId [GUID] -EXOOrganization contso.onmicrosoft.com -AzureADAutomationCertificate AzureADAppCert -AzureADAppId [GUID] -AzureADTenantId [GUID]
+Set-AzureGroupOwners -OwnerSourceGroup [GUID] -RoleGroupsIdentity [GUID] -EXOOrganization contso.onmicrosoft.com -EXOAutomationPSConnection [Name] -AADAutomationPSConnection [Name]
 ```
 In this example the script uses App-only 'Modern' authentication for access to Exchange Online and Azure AD. This will be the only support way to run unattended scripts into the future. 
 
