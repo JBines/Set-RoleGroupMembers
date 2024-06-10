@@ -1,4 +1,4 @@
-# Set-RoleGroupMembers
+# Sync-RoleGroupMembers
 This script automates the population of members from one group as members on CUSTOM Exchange Online Role Groups.  
 
 This has been created with the primary goal of allowing scoped administrators to manage Exchange permissions on a subset of users and groups.  
